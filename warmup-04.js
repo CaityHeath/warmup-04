@@ -4,15 +4,18 @@ const superagent =  require('superagent');
 
 let fetchPeopleAsync = () => {
   return superagent
-  .get('http://swapi.co/api/people')
+  .get('https://swapi.co/api/people')
   .then((response) => {
-    let result = response.body.result;
-    return result.map((char) => {
-      return superagent.get(char.url);
+    //console.log(response.body);
+    let result = response.body;
+    //console.log(result);
+    result.map((char) => {
+      console.log(char.results);
+      superagent.get(char.results);
     })
   })
   .then(promise =>{
-    
+    console.log(promise);
     return Promise.all(promise)
 
   .then(people => {
